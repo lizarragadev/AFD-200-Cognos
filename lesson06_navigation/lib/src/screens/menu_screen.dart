@@ -24,7 +24,7 @@ class MenuScreen extends StatelessWidget {
           ),
           ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, "2");
+                Navigator.pushNamed(context, "2", arguments: "Dato de menu");
               },
               child: const Text("Ir a pantalla 2")),
           const SizedBox(
