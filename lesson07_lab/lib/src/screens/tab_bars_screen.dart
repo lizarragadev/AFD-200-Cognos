@@ -13,22 +13,32 @@ class TabBarsScreen extends StatelessWidget {
         title: const Text('TabBars'),
         backgroundColor: Colors.deepOrangeAccent,
       ),
-      body: const DefaultTabController(
-        length: 3,
+      body: DefaultTabController(
+        length: 6,
         child: Column(
           children: [
             ColoredBox(
               color: Colors.deepOrangeAccent,
               child: TabBar(
-                  /*isScrollable: true, */
-                  tabs: [
-                    Tab(text: "Screen 1", icon: Icon(Icons.home)),
-                    Tab(text: "Screen 2", icon: Icon(Icons.star)),
-                    Tab(text: "Screen 3", icon: Icon(Icons.person)),
+                  isScrollable: true,
+                  unselectedLabelColor: Colors.white.withOpacity(0.3),
+                  labelPadding: EdgeInsets.symmetric(horizontal: 30),
+                  indicatorWeight: 5,
+                  indicatorColor: Colors.white,
+                  tabs: const [
+                    Tab(text: "Screen 1"),
+                    Tab(text: "Screen 2"),
+                    Tab(text: "Screen 3"),
+                    Tab(text: "Screen 1"),
+                    Tab(text: "Screen 2"),
+                    Tab(text: "Screen 3"),
                   ]),
             ),
-            Expanded(
+            const Expanded(
                 child: TabBarView(children: [
+              UnoScreen(),
+              DosScreen(),
+              TresScreen(),
               UnoScreen(),
               DosScreen(),
               TresScreen(),
