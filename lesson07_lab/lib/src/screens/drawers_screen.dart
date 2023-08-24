@@ -10,6 +10,8 @@ class DrawersScreen extends StatelessWidget {
         title: const Text('Drawers'),
       ),
       body: Container(),
+      drawer: Drawer(),
+      endDrawer: Drawer(),
     );
   }
 }
