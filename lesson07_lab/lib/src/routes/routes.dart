@@ -12,7 +12,7 @@ Map<String, WidgetBuilder> getRoutes() {
   return {
     "/": (context) => HomeScreen(),
     "/bottomNav": (context) => const BottomNavBarScreen(),
-    "/dataTable": (context) => const DataTablesScreen(),
+    "/dataTable": (context) => DataTablesScreen(),
     "/drawers": (context) => const DrawersScreen(),
     "/listView": (context) => const ListviewListtilesScreen(),
     "/selectableText": (context) => const SelectableTextScreen(),
