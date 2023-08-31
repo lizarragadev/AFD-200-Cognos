@@ -14,7 +14,7 @@ class _HomeScreenState extends State<HomeScreen> {
   DateTime dateCheckOut = DateTime.now();
   final int CHECK_IN = 1;
   final int CHECK_OUT = 2;
-  int numeroDeAdultos = 0;
+  int numeroDeAdultos = 1;
   int numeroDeNinios = 0;
   
   var textStyleOrange = const TextStyle(
