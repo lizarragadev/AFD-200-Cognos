@@ -9,6 +9,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  google_maps_flutter:
+  geolocator:
+  geocoding:
 
 dev_dependencies:
   flutter_test:
