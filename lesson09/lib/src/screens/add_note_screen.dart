@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:lesson09/src/model/note.dart';
 import 'package:lesson09/src/provider/auth_provider.dart';
@@ -12,10 +13,13 @@ class AddNoteScreen extends StatefulWidget {
 }
 
 class _AddNoteScreenState extends State<AddNoteScreen> {
-  String titulo = "";
-  String contenido = "";
+ 
 
+  initState() {
+    super.initState();
+    
 
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +40,8 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                 border: OutlineInputBorder(),
               ),
               onChanged: (nuevoValor) {
-                setState(() {
-                  titulo = nuevoValor;
-                });
+                
+
               },
               textCapitalization: TextCapitalization.sentences,
             ),
@@ -51,9 +54,8 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                 border: OutlineInputBorder(),
               ),
               onChanged: (nuevoValor) {
-                setState(() {
-                  contenido = nuevoValor;
-                });
+                
+
               },
               maxLines: 3,
               textCapitalization: TextCapitalization.sentences,
@@ -85,5 +87,8 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
 
   void validarForm() {
     
+
   }
+
+  
 }

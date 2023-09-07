@@ -50,20 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyB4r7AfcU7wMX-di177pUVmVTspTV6BlV0',
-    appId: '1:218173852672:android:d39287f4ae94865970dce5',
-    messagingSenderId: '218173852672',
-    projectId: 'fir-flutter-4380e',
-    storageBucket: 'fir-flutter-4380e.appspot.com',
+    apiKey: 'AIzaSyC3CpZYn1sEnruHwxhY2r2OiwFCZ2Ny_rg',
+    appId: '1:113527672110:android:116a4f2d9fff27807bfebf',
+    messagingSenderId: '113527672110',
+    projectId: 'flutter-cognos',
+    storageBucket: 'flutter-cognos.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBPI0MZwo3_I8C4N8Q9As-wGqgwbhJPbC4',
-    appId: '1:218173852672:ios:e418f3aa5a65e3ad70dce5',
-    messagingSenderId: '218173852672',
-    projectId: 'fir-flutter-4380e',
-    storageBucket: 'fir-flutter-4380e.appspot.com',
-    iosClientId: '218173852672-hem1b21qbm0nlraijvbi0dqvo1amoo72.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCugBTHfc8RumaYx3xnnwpDoqyse3zfM4I',
+    appId: '1:113527672110:ios:3d514928656607f47bfebf',
+    messagingSenderId: '113527672110',
+    projectId: 'flutter-cognos',
+    storageBucket: 'flutter-cognos.appspot.com',
+    iosClientId: '113527672110-5j1o8269un4d5ov8c4l9eqrc2uhpmeab.apps.googleusercontent.com',
     iosBundleId: 'dev.lizarraga.lesson09',
   );
 }

@@ -12,12 +12,11 @@ class AddContactScreen extends StatefulWidget {
 }
 
 class _AddContactScreenState extends State<AddContactScreen> {
-  String nombre = "";
-  String telefono = "";
-  String correo = "";
+  
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text('Agregar Contacto'),
@@ -35,9 +34,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                 border: OutlineInputBorder(),
               ),
               onChanged: (nuevoValor) {
-                setState(() {
-                  nombre = nuevoValor;
-                });
+                
+
               },
               textCapitalization: TextCapitalization.words,
             ),
@@ -50,9 +48,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                 border: OutlineInputBorder(),
               ),
               onChanged: (nuevoValor) {
-                setState(() {
-                  telefono = nuevoValor;
-                });
+                
+
               },
               keyboardType: TextInputType.phone,
             ),
@@ -65,9 +62,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
                 border: OutlineInputBorder(),
               ),
               onChanged: (nuevoValor) {
-                setState(() {
-                  correo = nuevoValor;
-                });
+                
+
               },
               keyboardType: TextInputType.emailAddress,
             ),
@@ -98,4 +94,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
   void validarForm() {
     
   }
+
+  
+
+  
 }

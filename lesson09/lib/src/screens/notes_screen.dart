@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:lesson09/src/model/note.dart';
 import 'package:lesson09/src/provider/auth_provider.dart';
@@ -13,10 +14,11 @@ class NotesScreen extends StatefulWidget {
 }
 
 class _NotesScreenState extends State<NotesScreen> {
+  
 
   @override
   Widget build(BuildContext context) {
-  
+    
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -30,8 +32,8 @@ class _NotesScreenState extends State<NotesScreen> {
       ),
       body: Padding(
           padding: const EdgeInsets.all(5.0),
-          child: null
-        ),
+          child: Text("")
+              ),
     );
   }
 

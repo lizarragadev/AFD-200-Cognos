@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:lesson09/src/model/contact.dart';
 import 'package:lesson09/src/provider/auth_provider.dart';
@@ -13,9 +14,11 @@ class ContactsScreen extends StatefulWidget {
 }
 
 class _ContactsScreenState extends State<ContactsScreen> {
+  
 
   @override
   Widget build(BuildContext context) {
+    
 
     return Scaffold(
         floatingActionButton: FloatingActionButton(
@@ -30,7 +33,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
         body: Padding(
           padding: const EdgeInsets.all(5),
           child: StreamBuilder(
-            stream: null,
+            stream: null!,
             builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
               if (snapshot.hasError) {
                 //mostrarMensaje(context, "No se pudo obtener datos", Constants.MENSAJE_ERROR);
@@ -52,17 +55,11 @@ class _ContactsScreenState extends State<ContactsScreen> {
               }
 
 
-
-
               return Container(
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(12)),
                 child: ListView.builder(
-
-
                     itemCount: 0,
-                  
-                  
                     itemBuilder: (context, index) {
                       return Card(
                         color: const Color.fromRGBO(174, 226, 214, 1.0),
@@ -85,7 +82,6 @@ class _ContactsScreenState extends State<ContactsScreen> {
                               ),
                               onPressed: () {
 
-
                               },
                             ),
                           ),
@@ -97,4 +93,6 @@ class _ContactsScreenState extends State<ContactsScreen> {
           ),
         ));
   }
+
+
 }

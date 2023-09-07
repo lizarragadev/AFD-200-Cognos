@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lesson09/src/provider/auth_provider.dart';
 import 'package:lesson09/src/routes/routes.dart';
+import 'package:lesson09/src/screens/login_screen.dart';
 
 class MyApp extends StatelessWidget {
   late AuthProvider provider;
@@ -11,8 +12,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      onGenerateRoute: MyRoutes.generateRoute,
-      initialRoute: RoutePaths.loginScreen,
+      home: LoginScreen(),
     );
   }
 

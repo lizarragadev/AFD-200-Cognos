@@ -12,14 +12,12 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  late AuthProvider provider;
-  String correo = "";
-  String contrasenia = "";
+  
 
   @override
   void initState() {
     super.initState();
-    provider = AuthProvider();
+
   }
 
   @override
@@ -119,9 +117,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   hintStyle:
                                       TextStyle(color: Colors.grey[400])),
                               onChanged: (nuevoValor) {
-                                setState(() {
-                                  correo = nuevoValor;
-                                });
+                                
+
                               },
                             ),
                           ),
@@ -135,9 +132,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   hintStyle:
                                       TextStyle(color: Colors.grey[400])),
                               onChanged: (nuevoValor) {
-                                setState(() {
-                                  contrasenia = nuevoValor;
-                                });
+                                
+
                               },
                             ),
                           )
@@ -149,8 +145,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     InkWell(
                       onTap: () {
-
-
+                        
+                        
                       },
                       splashColor: Colors.blue,
                       child: Container(
@@ -208,4 +204,5 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ));
   }
 
+  
 }
