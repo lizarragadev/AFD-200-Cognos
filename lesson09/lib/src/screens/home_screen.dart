@@ -34,8 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
               icon: const Icon(Icons.logout),
               onPressed: () {
-                
-                
+                cerrarSesion();
               })
         ],
         backgroundColor: const Color.fromRGBO(143, 148, 251, 1),
@@ -84,5 +83,10 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  Future<void> cerrarSesion() async {
+    await provider.cerrarSesion();
+    Navigator.pushReplacementNamed(context, RoutePaths.loginScreen);
+    mostrarMensaje(context, "Sesión cerrada", Constants.MENSAJE_EXITOSO);
+  }
   
 }

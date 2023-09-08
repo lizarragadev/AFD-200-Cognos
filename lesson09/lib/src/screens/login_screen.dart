@@ -142,8 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     InkWell(
                       onTap: () {
-                        
-                        
+                        validarUsuario();
                       },
                       splashColor: Colors.deepPurpleAccent,
                       child: Container(
@@ -204,5 +203,23 @@ class _LoginScreenState extends State<LoginScreen> {
         ));
   }
 
-
+  Future<void> validarUsuario() async {
+    if(correo.isNotEmpty&& contrasenia.isNotEmpty) {
+      if(contrasenia.length >= 6) { 
+        showBarraProgreso(context, "Iniciando sesión");
+        var res = await provider.iniciarSesion(correo, contrasenia);
+        Navigator.of(context).pop();
+        if(res != null) {
+          mostrarMensaje(context, "Inicio de sesión exitoso", Constants.MENSAJE_EXITOSO);
+          Navigator.pushReplacementNamed(context, RoutePaths.homeScreen);
+        } else {
+          mostrarMensaje(context, "Error al registrar", Constants.MENSAJE_ERROR);
+        }   
+      } else {
+        mostrarMensaje(context, "La contraseña debe tener al menos 6 caracteres", Constants.MENSAJE_ERROR);
+      }
+    } else {
+      mostrarMensaje(context, "Existen campios vacíos", Constants.MENSAJE_ERROR );
+    }
+  }
 }

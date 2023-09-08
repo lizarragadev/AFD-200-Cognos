@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lesson09/src/provider/auth_provider.dart';
 import 'package:lesson09/src/routes/routes.dart';
@@ -12,8 +13,18 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      onGenerateRoute: MyRoutes.generateRoute,
+      initialRoute: getRoute(),
     );
+  }
+
+  String getRoute() {
+    User? user = provider.getUsuario();
+    if(user != null) {
+      return RoutePaths.homeScreen;
+    } else {
+      return RoutePaths.loginScreen;
+    }
   }
 
 }

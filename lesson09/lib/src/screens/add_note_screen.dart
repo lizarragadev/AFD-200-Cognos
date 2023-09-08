@@ -1,9 +1,12 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:lesson09/src/model/note.dart';
 import 'package:lesson09/src/provider/auth_provider.dart';
 import 'package:lesson09/src/utils/constants.dart';
 import 'package:lesson09/src/utils/utils.dart';
+import 'package:uuid/uuid.dart';
 
 class AddNoteScreen extends StatefulWidget {
   const AddNoteScreen({Key? key}) : super(key: key);
@@ -13,12 +16,15 @@ class AddNoteScreen extends StatefulWidget {
 }
 
 class _AddNoteScreenState extends State<AddNoteScreen> {
- 
+  String titulo = "";
+  String contenido = "";
+  late AuthProvider provider;
+  late User? user;
 
   initState() {
     super.initState();
-    
-
+    provider = AuthProvider();
+    user = provider.getUsuario();
   }
 
   @override
@@ -40,8 +46,9 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                 border: OutlineInputBorder(),
               ),
               onChanged: (nuevoValor) {
-                
-
+                setState(() {
+                  titulo = nuevoValor;
+                });
               },
               textCapitalization: TextCapitalization.sentences,
             ),
@@ -54,8 +61,9 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                 border: OutlineInputBorder(),
               ),
               onChanged: (nuevoValor) {
-                
-
+                setState(() {
+                  contenido = nuevoValor;
+                });
               },
               maxLines: 3,
               textCapitalization: TextCapitalization.sentences,
@@ -65,7 +73,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
             ),
             ElevatedButton(
               onPressed: () {
-                validarForm();
+                validarForm(context);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,
@@ -85,10 +93,33 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
     );
   }
 
-  void validarForm() {
-    
-
+  void validarForm(context) {
+    if(titulo.isNotEmpty && contenido.isNotEmpty) {
+      guardarNota(context);
+    } else {
+      mostrarMensaje(context, "Existen campos vacios", Constants.MENSAJE_ERROR);
+    }
   }
+
+  Future<void> guardarNota(cont) async {
+    try {
+      showBarraProgreso(context, "Agregando Nota...");
+      final realtime = FirebaseDatabase.instance;
+      var refRealtime = realtime.ref().child("${Constants.NOTAS}/${generarUUID()}");
+      await refRealtime.set(crearNote().toMap());
+      Navigator.pop(cont);
+      mostrarMensaje(cont, "Nota agregada correctamente", Constants.MENSAJE_EXITOSO);
+      Navigator.pop(cont);
+    } catch(err) {
+      mostrarMensaje(cont, err.toString(), Constants.MENSAJE_ERROR);
+    }
+  }
+
+  Note crearNote() => Note(userId: user!.uid, titulo: titulo, contenido: contenido);
+
+  dynamic generarUUID() => const Uuid().v4();
+  
+
 
   
 }

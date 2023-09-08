@@ -12,12 +12,14 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  
+  late AuthProvider provider;
+  String correo = "";
+  String contrasenia = "";
 
   @override
   void initState() {
     super.initState();
-
+    provider = AuthProvider();
   }
 
   @override
@@ -117,8 +119,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   hintStyle:
                                       TextStyle(color: Colors.grey[400])),
                               onChanged: (nuevoValor) {
-                                
-
+                                setState(() {
+                                  correo = nuevoValor;
+                                });
                               },
                             ),
                           ),
@@ -132,8 +135,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   hintStyle:
                                       TextStyle(color: Colors.grey[400])),
                               onChanged: (nuevoValor) {
-                                
-
+                                setState(() {
+                                  contrasenia = nuevoValor;
+                                });
                               },
                             ),
                           )
@@ -145,8 +149,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     InkWell(
                       onTap: () {
-                        
-                        
+                        validarUsuario();
                       },
                       splashColor: Colors.blue,
                       child: Container(
@@ -204,5 +207,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ));
   }
 
-  
+  Future<void> validarUsuario() async {
+    if(correo.isNotEmpty&& contrasenia.isNotEmpty) {
+      if(contrasenia.length >= 6) { 
+        showBarraProgreso(context, "Registrando");
+        var res = await provider.registrar(correo, contrasenia);
+        Navigator.of(context).pop();
+        if(res != null) {
+          mostrarMensaje(context, "Registro exitoso", Constants.MENSAJE_EXITOSO);
+          Navigator.pushReplacementNamed(context, RoutePaths.loginScreen);
+        } else {
+          mostrarMensaje(context, "Error al registrar", Constants.MENSAJE_ERROR);
+        }   
+      } else {
+        mostrarMensaje(context, "La contraseña debe tener al menos 6 caracteres", Constants.MENSAJE_ERROR);
+      }
+    } else {
+      mostrarMensaje(context, "Existen campios vacíos", Constants.MENSAJE_ERROR );
+    }
+  }
 }
