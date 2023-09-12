@@ -44,10 +44,10 @@ class _NotesScreenState extends State<NotesScreen> {
       body: Padding(
           padding: const EdgeInsets.all(5.0),
           child: FirebaseAnimatedList(
-            defaultChild: Center(
+            defaultChild: const Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   CircularProgressIndicator(),
                   SizedBox(width: 20,),
                   Text("Cargando...")
