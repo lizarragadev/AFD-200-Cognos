@@ -9,6 +9,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  sqflite:
+  path_provider:
+  image_picker:
+  signature:
 
 dev_dependencies:
   flutter_test:
