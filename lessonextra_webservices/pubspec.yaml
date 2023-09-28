@@ -9,6 +9,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  http:
+  card_swiper:
+  flutter_rating_bar:
 
 dev_dependencies:
   flutter_test:

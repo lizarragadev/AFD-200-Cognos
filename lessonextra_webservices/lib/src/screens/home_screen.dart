@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:lesson_extra_webservices/src/models/pelicula.dart';
+import 'package:lesson_extra_webservices/src/providers/peliculas_provider.dart';
+import 'package:lesson_extra_webservices/src/widgets/card_swipper.dart';
+import 'package:lesson_extra_webservices/src/widgets/movie_horizontal.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({Key? key}) : super(key: key);
-
+  final peliculasProvider = PeliculasProvider();
 
   @override
   Widget build(BuildContext context) {
+    peliculasProvider.getPopulares();
 
     return Scaffold(
       appBar: AppBar(
@@ -15,13 +19,32 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [_swiperCards(), _footer()],
+        children: [
+          const SizedBox(height: 50),
+          _swiperCards(),
+          const SizedBox(height: 50),
+          _footer()
+        ],
       ),
     );
   }
 
   Widget _swiperCards() {
-    return null!;
+    return FutureBuilder(
+      future: peliculasProvider.getEnCines(),
+      builder: (context, AsyncSnapshot<List<Pelicula>> snapshot) {
+        if( snapshot.hasData ) {
+          return CardSwiper(
+            peliculas: snapshot.data!,
+          );
+        } else {
+          return const SizedBox(
+            height: 500,
+            child: Center(child: CircularProgressIndicator(),),
+          );
+        }
+      },
+    );
   }
 
   Widget _footer() {
@@ -30,22 +53,22 @@ class HomeScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(
-            height: 10,
-          ),
+          const SizedBox(height: 10,),
           Container(
             padding: const EdgeInsets.only(left: 20),
-            child: const Text(
-              "Populares",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
+            child: const Text("Populares", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
           ),
-          const SizedBox(
-            height: 10.0,
+          const SizedBox(height: 10.0,),
+          StreamBuilder(
+            stream: peliculasProvider.popularesStream,
+            builder: (context, AsyncSnapshot<List<Pelicula>> snapshot) {
+              if( snapshot.hasData ) {
+                return Text("");
+              } else {
+                return const Center(child: CircularProgressIndicator(),);
+              }
+            },
           ),
-          
-          
-          
         ],
       ),
     );
