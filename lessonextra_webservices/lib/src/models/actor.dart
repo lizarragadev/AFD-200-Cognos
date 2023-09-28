@@ -3,6 +3,7 @@ class Actores {
   Actores();
 
   Actores.fromJsonList(List<dynamic> jsonList) {
+    // ignore: unnecessary_null_comparison
     if (jsonList == null) return;
     jsonList.forEach((item) {
       final actor = Actor.fromJson(item);

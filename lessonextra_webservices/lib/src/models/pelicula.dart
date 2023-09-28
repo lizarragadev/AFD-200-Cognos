@@ -3,6 +3,7 @@ class Peliculas {
   Peliculas();
 
   Peliculas.fromJsonList(List<dynamic> jsonList) {
+    // ignore: unnecessary_null_comparison
     if (jsonList == null) return;
     for (var item in jsonList) {
       final pelicula = Pelicula.fromJsonMap(item);
