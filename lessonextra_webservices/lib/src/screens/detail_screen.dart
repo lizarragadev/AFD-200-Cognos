@@ -22,9 +22,15 @@ class DetailScreen extends StatelessWidget {
             _posterTitulo(context, pelicula),
             _createDetails(pelicula),
             _descripcion(pelicula),
-           
-
-
+            Container(
+              margin: const EdgeInsets.only(left: 20, bottom: 15),
+              child: const Text("Reparto",
+                textAlign: TextAlign.start, style: TextStyle(
+                  fontSize: 17, fontWeight: FontWeight.bold, color: Colors.deepPurple
+                ),
+              ),
+            ),
+            _crearCasting(pelicula)
           ]),
         )
       ],
@@ -169,7 +175,18 @@ class DetailScreen extends StatelessWidget {
 
   Widget _crearCasting(Pelicula pelicula) {
     final peliProvider = PeliculasProvider();
-    return Text("");
+    return FutureBuilder(
+      future: peliProvider.getActores(pelicula.id.toString()), 
+      builder: (context, AsyncSnapshot<List<Actor>> snapshot) {
+        if(snapshot.hasData) {
+          return _crearActoresPageView(snapshot.data!);
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      }
+    );
   }
 
   Widget _crearActoresPageView(List<Actor> actores) {

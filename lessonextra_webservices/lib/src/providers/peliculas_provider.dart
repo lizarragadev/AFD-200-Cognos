@@ -10,7 +10,7 @@ class PeliculasProvider {
   final String _url = "api.themoviedb.org";
   final String _language = "es-ES";
   
-   int _popularesPage = 0;
+  int _popularesPage = 0;
   bool _cargando = false;
 
   List<Pelicula> _populares = [];

@@ -29,8 +29,67 @@ class DatabaseHelper {
   }
 
   _initDatabase() async {
-    
+    Directory documentDirectory = await getApplicationDocumentsDirectory();
+    String path = join(documentDirectory.path, _databaseName);
+    return await openDatabase(path, version: _databaseVersion, onCreate: _onCreate);
   }
 
+  Future _onCreate(Database db, int version) async {
+    await db.execute(
+      '''
+        CREATE TABLE $tableCategory (
+          $columnId INTEGER PRIMARY KEY,
+          $columnName TEXT NOT NULL
+        )
+      '''
+    );
+    await db.execute(
+      '''
+        CREATE TABLE $tableContact (
+          $columnId INTEGER PRIMARY KEY,
+          $columnName TEXT NOT NULL,
+          $columnLName TEXT NOT NULL,
+          $columnMobile TEXT NOT NULL,
+          $columnEmail TEXT NOT NULL,
+          $columnCategory TEXT NOT NULL,
+          $columnProfile TEXT NOT NULL
+        )
+      ''');
+  }
+
+  Future<int> insertCategory(Map<String, dynamic> row) async {
+    Database db = await instance.database;
+    return await db.insert(tableCategory, row);
+  }
+
+  Future<int> insertContact(Map<String, dynamic> row) async {
+    Database db = await instance.database;
+    return await db.insert(tableContact, row);
+  }
+
+  Future<int> upadate(Map<String, dynamic> row) async {
+    Database db = await instance.database;
+    int id = row[columnId];
+    return await db.update(tableContact, row, where: '$columnId = ?', whereArgs: [id]);
+  }
+
+  Future<int> deleteCategory(int id) async {
+    Database db = await instance.database;
+    return await db.delete(tableCategory, where: '$columnId = ?', whereArgs: [id]);
+  }
+
+  Future<int> deleteContact(int id) async {
+    Database db = await instance.database;
+    return await db.delete(tableContact, where: '$columnId = ?', whereArgs: [id]);
+  }
+
+  Future<List<Map<String, dynamic>>> queryAllCategory() async {
+    Database db = await instance.database;
+    return await db.query(tableCategory);
+  }
   
+  Future<List<Map<String, dynamic>>> queryAllContacts() async {
+    Database db = await instance.database;
+    return await db.query(tableContact);
+  }
 }

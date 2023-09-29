@@ -12,6 +12,7 @@ dependencies:
   http:
   card_swiper:
   flutter_rating_bar:
+  connectivity:
 
 dev_dependencies:
   flutter_test:

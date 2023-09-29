@@ -18,9 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   
   @override
   void initState() {
-    
-
-    
+    categoryList();
     super.initState();
   }
 
@@ -92,9 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: TextButton(
                         onPressed: () {
                           if (formGlobalKey.currentState!.validate()) {
-                            
-
-
+                            insertCategory();
                           }
                         },
                         child: const Text(
@@ -126,9 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     const Spacer(),
                                     IconButton(
                                       onPressed: () {
-                                        
-
-
+                                        delete(item['_id']);
                                       },
                                       icon: const Icon(Icons.delete),
                                     ),
@@ -155,5 +149,25 @@ class _HomeScreenState extends State<HomeScreen> {
     ));
   }
 
+  void insertCategory() async {
+    Map<String, dynamic> row = {
+      DatabaseHelper.columnName: _categoryName.text
+    };
+    int id = await dbHelper.insertCategory(row);
+    _categoryName.text = "";
+    categoryList();
+  }
+
+  void categoryList() async {
+    final allRows = await dbHelper.queryAllCategory();
+    setState(() {
+      allCategoryData = allRows;
+    });
+  }
+
+  void delete(int id) async {
+    final rowDeleted = await dbHelper.deleteCategory(id);
+    categoryList();
+  }
   
 }

@@ -15,15 +15,12 @@ class ContactList extends StatefulWidget {
 
 class _ContactListState extends State<ContactList> {
   final dbHelper = DatabaseHelper.instance;
-  List<Map<String, dynamic>> allCategoryData = [];
+  List<Map<String, dynamic>> allContactData = [];
 
   @override
   void initState() {
     super.initState();
-    
-
-
-    
+    contactList();
   }
 
   @override
@@ -41,10 +38,10 @@ class _ContactListState extends State<ContactList> {
             const Text(""),
             Expanded(
                 child: ListView.builder(
-              itemCount: allCategoryData.length,
+              itemCount: allContactData.length,
               padding: EdgeInsets.zero,
               itemBuilder: (_, index) {
-                var item = allCategoryData[index];
+                var item = allContactData[index];
                 Uint8List bytes = base64Decode(item['profile']);
                 return Container(
                   padding: EdgeInsets.zero,
@@ -60,14 +57,12 @@ class _ContactListState extends State<ContactList> {
                             minRadius: 20,maxRadius: 25,
                             child: Image.memory(bytes,fit: BoxFit.fill,),),
                           const SizedBox(width: 20,),
-                          Text("${item['name']}"),
+                          Text("${item['name']} "),
                           Text("${item['lname']}"),
                           const Spacer(),
                           IconButton(
                             onPressed: () {
-                              
-
-
+                              deleteContact(item['_id']);
                             },
                             icon: const Icon(Icons.delete),
                           ),
@@ -89,5 +84,15 @@ class _ContactListState extends State<ContactList> {
     );
   }
 
-  
+  void contactList() async {
+    final allContacts = await dbHelper.queryAllContacts();
+    setState(() {
+      allContactData = allContacts;
+    });
+  }
+
+  void deleteContact(int id) async {
+    final contactDeleted = await dbHelper.deleteContact(id);
+    contactList();
+  }
 }

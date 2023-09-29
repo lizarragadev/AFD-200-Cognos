@@ -40,8 +40,7 @@ class _AddContactState extends State<AddContact> {
   @override
   void initState() {
     super.initState();
-    
-    
+    allCategories();
     var _signatureCanvas = Signature(
       controller: _controller,
       width: 300,
@@ -243,9 +242,7 @@ class _AddContactState extends State<AddContact> {
                         child: TextButton(
                           onPressed: () {
                             if (formGlobalKey.currentState!.validate()) {
-                              
-
-
+                              insertContact();
                             }
                           },
                           child: const Text(
@@ -265,5 +262,30 @@ class _AddContactState extends State<AddContact> {
     );
   }
 
-  
+  void allCategories() async {
+    final allCat = await dbHelper.queryAllCategory();
+    for(var element in allCat) {
+      allCategoryData.add(element['name']);
+    }
+    setState(() {});
+  }
+
+  void insertContact() async {
+    var base64image;
+    if(imageFile?.exists() != null) {
+      base64image = base64Encode(imageFile!.readAsBytesSync().toList()); 
+    }
+
+    Map<String, dynamic> row = {
+      DatabaseHelper.columnName: _firstName.text,
+      DatabaseHelper.columnLName: _lastName.text,
+      DatabaseHelper.columnMobile: _mobileNumber.text,
+      DatabaseHelper.columnEmail: _emailAddress.text,
+      DatabaseHelper.columnCategory: currentCategory,
+      DatabaseHelper.columnProfile: base64image,
+    };
+    currentCategory = "";
+    final id = await dbHelper.insertContact(row);
+    Navigator.push(context, MaterialPageRoute(builder: (_) => ContactList()));
+  }
 }
